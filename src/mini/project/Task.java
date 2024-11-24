@@ -1,6 +1,7 @@
 package mini.project;
 /**
  *@author meriem harrouz 
+ *and interface with all the main operations 
  */
 public interface Task {
 	
