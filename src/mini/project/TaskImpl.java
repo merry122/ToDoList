@@ -43,11 +43,11 @@ public class TaskImpl implements Task {
      * @param dueDate     The due date in "YYYY-MM-DD" format
      */
     @Override
-    public void createTask(String name, String description, String dueDate) {
+    public void createTask(String name,String description,String dueDate) {
         if (name==null||name.isEmpty())   throw new IllegalArgumentException("Task name cannot be empty.");
-        if (description == null || description.isEmpty())    throw new IllegalArgumentException("Task description cannot be empty.");
+        if (description==null||description.isEmpty())    throw new IllegalArgumentException("Task description cannot be empty.");
         try {
-            this.dueDate = LocalDate.parse(dueDate);
+            this.dueDate=LocalDate.parse(dueDate);
             if (this.dueDate.isBefore(LocalDate.now())) {
                 throw new IllegalArgumentException("Due date cannot be in the past.");
             }
@@ -69,8 +69,8 @@ public class TaskImpl implements Task {
      * @param newDueDate     The updated due date in "YYYY-MM-DD" format
      */
     @Override
-    public void editTask(String newName, String newDescription, String newDueDate) {
-        createTask(newName, newDescription, newDueDate); // Reuse validation logic
+    public void editTask(String newName,String newDescription,String newDueDate) {
+        createTask(newName,newDescription,newDueDate); // Reuse validation logic
     }
 
     /**
@@ -154,10 +154,8 @@ public class TaskImpl implements Task {
      * @param minutes Time in minutes to add
      */
     public void addTimeSpent(long minutes) {
-        if (minutes < 0) {
-            throw new IllegalArgumentException("Time spent cannot be negative.");
-        }
-        this.timeSpent += minutes;
+        if (minutes<0)    throw new IllegalArgumentException("Time spent cannot be negative.");
+        this.timeSpent+=minutes;
     }
 
     /**
@@ -176,14 +174,14 @@ public class TaskImpl implements Task {
      */
     @Override
     public String getTaskDetails() {
-        String subtasksInfo = subtasks.isEmpty() ? "" : "\nSubtasks: " + String.join(", ", subtasks);
-        return "Name: " + name +
-                "\nDescription: " + description +
-                "\nDue Date: " + dueDate +
-                "\nPriority: " + (priority != null ? priority : "Not Set") +
-                "\nStatus: " + status +
-                "\nTime Spent: " + timeSpent + " minutes" +
-                "\nCompleted: " + (isCompleted ? "Yes" : "No") +
+        String subtasksInfo=subtasks.isEmpty()?"":"\nSubtasks: "+String.join(", ",subtasks);
+        return "Name: "+name+
+                "\nDescription: "+description +
+                "\nDue Date: "+dueDate +
+                "\nPriority: "+(priority!=null?priority:"Not Set") +
+                "\nStatus: "+status +
+                "\nTime Spent: "+timeSpent+" minutes" +
+                "\nCompleted: "+(isCompleted?"Yes":"No") +
                 subtasksInfo;
     }
 
