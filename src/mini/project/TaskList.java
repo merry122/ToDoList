@@ -14,7 +14,7 @@ public abstract class TaskList {
 
     /**
      *  Method to add a task to the list
-     * @param task
+     * @param task attribute of type Task
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -22,7 +22,7 @@ public abstract class TaskList {
 
     /**
      *  Method to remove a task from the list
-     * @param task
+     * @param task attribute of type Task
      */
     public void deleteTask(Task task) {
         tasks.remove(task);
@@ -30,8 +30,8 @@ public abstract class TaskList {
 
     /**
      *  Method to get the task at a specific index
-     * @param index 
-     * @return
+     * @param index  the index of the task we need to find
+     * @return the task that was found according to the index
      */
     public Task getTask(int index) {
         if (index>=0&&index<tasks.size())    return tasks.get(index);
