@@ -2,8 +2,7 @@ package mini.project;
 /**
  *@author meriem harrouz 
  */
-import java.util.ArrayList;
-import java.util.List;
+
 
 public abstract class TaskList {
 	/**
@@ -13,13 +12,13 @@ public abstract class TaskList {
      *  Method to add a task to the list
      * @param task attribute of type Task
      */
-    public abstract addTask(Task task);
+    public abstract void addTask(Task task);
 
     /**
      *  Method to remove a task from the list
      * @param task attribute of type Task
      */
-    public abstract deleteTask(Task task);
+    public abstract void deleteTask(Task task);
 
 
     /**
@@ -29,7 +28,7 @@ public abstract class TaskList {
      * @param newDescription
      * @param newDueDate
      */
-    public abstract editTask(int index,String newName,String newDescription,String newDueDate);
+    public abstract void editTask(int index,String newName,String newDescription,String newDueDate);
 
     /**
      *  Abstract method to display all tasks
