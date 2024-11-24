@@ -1,10 +1,10 @@
 package mini.project;
-//tesnim
+
 public interface Task {
-	mmm
-	 // Method to get the task details (e.g., description)
+
+    // Method to get the task details
     String getDescription();
-    //hhhkjh
+	
     // Method to set or update the task description
     void setDescription(String description);
     
