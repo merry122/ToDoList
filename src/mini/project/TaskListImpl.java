@@ -16,6 +16,7 @@ public class TaskListImpl extends TaskList {
     /**
     @author raouane krama
     **/
+    /**method to add a task to the database**/
     public void addTasks(TaskImpl task){
         Connection con=DBconnection.getConnection();
         if(con==null){
@@ -40,6 +41,7 @@ public class TaskListImpl extends TaskList {
             }
         }
     }
+    /**method to UPDATE a task in the database**/
     public void editTask(TaskImpl task){
         Connection con=DBconnection.getConnection();
         if(con==null){
@@ -66,7 +68,7 @@ public class TaskListImpl extends TaskList {
         }
         
     }
-
+    /**method to delete a task from the database**/
     public void deleteTasks(TaskImpl task){
         Connection con=DBconnection.getConnection();
         if(con==null){
