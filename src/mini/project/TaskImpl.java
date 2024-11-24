@@ -68,6 +68,10 @@ public class TaskImpl implements Task {
     @Override
     public void deleteTask() {
         // This method might reset attributes or be used in conjunction with a list removal operation
+        this.name=null;
+        this.description=null;
+        this.dueDate=null;
+        this.isCompleted=false;
     }
 
     /**
