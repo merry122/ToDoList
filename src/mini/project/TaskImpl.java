@@ -21,17 +21,6 @@ public class TaskImpl implements Task {
     private String priority; // Task priority: High, Medium, or Low
     private List<String> subtasks=new ArrayList<>(); // List to store subtasks
     private long timeSpent; // Time spent on the task in minutes
-
-    /**
-     * Enum representing task status.
-     * Provides clear status options: PENDING, IN_PROGRESS, COMPLETED.
-     */
-    public enum Status {
-        PENDING,
-        IN_PROGRESS,
-        COMPLETED
-    }
-
     private Status status=Status.PENDING; // Default status is PENDING
 
     /**
