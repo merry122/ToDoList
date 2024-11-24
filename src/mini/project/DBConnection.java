@@ -1,4 +1,4 @@
-package com.raouane.todolist;
+package mini.project;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
