@@ -1,12 +1,92 @@
 package mini.project;
 
+import java.util.ArrayList;
+import java.sql.Connection;
+
 /**
  * @author meriem harrouz
  * Concrete class extending the abstract TaskList.
  * Manages a collection of tasks and provides functionality to display them.
  */
 public class TaskListImpl extends TaskList {
+    private ArrayList<TaskImp> tasks;
+    public TaskListImpl(){
+        tasks=new ArrayList<>();
+    }
+    /**
+    @author raouane krama
+    **/
+    public void addTasks(TaskImpl task){
+        Connection con=DBconnection.getConnection();
+        if(con==null){
+            return;
+        }
+        String query="INSERT INTO Tasks (name,description,dueDate,is_completed) VALUES (?,?,?,?);";
+        try(PreparedStatement preparedStatement=con.preparedStatement(query)){
+            preparedStatement.setString(1,TaskImpl.getName());
+            preparedStatement.setString(2,TaskImpl.getDescription());
+            preparedStatement.setDate(3,Date.ValueOf(TaskImpl.getDueDate());
+            preparedStatement.setBoolean(4,TaskImpl.isCompleted());
 
+            preparedStatement.executeUpdate();
+            System.out.println("Task is add to DataBase!");
+        }catch(SQLException mess){
+            mess.printStackTrace();
+        } finally {
+            try{
+                con.close();
+            }catch(SQLException mess){
+                mess.printStackTrace();
+            }
+        }
+    }
+    public void editTask(TaskImpl task){
+        Connection con=DBconnection.getConnection();
+        if(con==null){
+            return;
+        }
+        String query="UPDATE Tasks SET name=?, description=?, dueDate=?, is_completed=? WHERE ID=?;";
+        try(PreparedStatement preparedStatement=con.preparedStatement(query)){
+            preparedStatement.setString(1,TaskImpl.getName());
+            preparedStatement.setString(2,TaskImpl.getDescription());
+            preparedStatement.setDate(3,Date.ValueOf(TaskImpl.getDueDate());
+            preparedStatement.setBoolean(4,TaskImpl.isCompleted());
+            preparedStatement.setInt(5,TaskImpl.getId());
+
+            preparedStatement.executeUpdate();
+            System.out.println("Task is UPDATE successfully!");
+        }catch(SQLException mess){
+            mess.printStackTrace();
+        } finally {
+            try{
+                con.close();
+            }catch(SQLException mess){
+                mess.printStackTrace();
+            }
+        }
+        
+    }
+
+    public void deleteTasks(TaskImpl task){
+        Connection con=DBconnection.getConnection();
+        if(con==null){
+            return;
+        }
+        String query="DELETE FROM Tasks WHERE id=?;";
+        try(PreparesStatement preparedStatement=con.preparedStatement(query){
+            preparedStatement.setInt(1,id);
+
+            preparedStatement.executeUpdate();
+        }catch(SQLException mess){
+            mess.printStackTrace();
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException mess){
+                mess.printStackTrace();
+            }
+        }
+    }
     /**
      * Displays all tasks in the task list.
      * If the list is empty, a message is shown to inform the user.
