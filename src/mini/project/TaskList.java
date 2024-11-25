@@ -1,13 +1,13 @@
 package mini.project;
 /**
- *@author meriem harrouz 
+ *@author meriem harrouz
  */
 
 
 public abstract class TaskList {
-	/**
-	 *  it's a class that manages tasks
-	 */
+    /**
+     *  it's a class that manages tasks
+     */
     /**
      *  Method to add a task to the list
      * @param task attribute of type Task
@@ -21,14 +21,8 @@ public abstract class TaskList {
     public abstract void deleteTask(TaskImpl task);
 
 
-    /**
-     *  Method to edit a task in the list
-     * @param index
-     * @param newName
-     * @param newDescription
-     * @param newDueDate
-     */
-    public abstract void editTask(int index,String newName,String newDescription,String newDueDate);
+  
+    public abstract void editTask(TaskImpl task);
 
     /**
      *  Abstract method to display all tasks
