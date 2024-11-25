@@ -12,13 +12,13 @@ public abstract class TaskList {
      *  Method to add a task to the list
      * @param task attribute of type Task
      */
-    public abstract void addTask(Task task);
+    public abstract void addTask(TaskImpl task);
 
     /**
      *  Method to remove a task from the list
      * @param task attribute of type Task
      */
-    public abstract void deleteTask(Task task);
+    public abstract void deleteTask(TaskImpl task);
 
 
     /**
