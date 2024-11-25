@@ -2,6 +2,9 @@ package mini.project;
 
 import java.util.ArrayList;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Date;
 
 /**
  * @author meriem harrouz
@@ -9,25 +12,25 @@ import java.sql.Connection;
  * Manages a collection of tasks and provides functionality to display them.
  */
 public class TaskListImpl extends TaskList {
-    private ArrayList<TaskImp> tasks;
+    private ArrayList<TaskImpl> tasks;
     public TaskListImpl(){
         tasks=new ArrayList<>();
     }
     /**
-    @author raouane krama
-    **/
+     @author raouane krama
+     **/
     /**method to add a task to the database**/
-    public void addTasks(TaskImpl task){
+    public void addTask(TaskImpl task){
         Connection con=DBconnection.getConnection();
         if(con==null){
             return;
         }
         String query="INSERT INTO Tasks (name,description,dueDate,is_completed) VALUES (?,?,?,?);";
-        try(PreparedStatement preparedStatement=con.preparedStatement(query)){
-            preparedStatement.setString(1,TaskImpl.getName());
-            preparedStatement.setString(2,TaskImpl.getDescription());
-            preparedStatement.setDate(3,Date.ValueOf(TaskImpl.getDueDate());
-            preparedStatement.setBoolean(4,TaskImpl.isCompleted());
+        try(PreparedStatement preparedStatement=con.prepareStatement(query)){
+            preparedStatement.setString(1,task.getName());
+            preparedStatement.setString(2,task.getDescription());
+            preparedStatement.setDate(3, Date.valueOf(task.getDueDate()));
+            preparedStatement.setBoolean(4,task.isCompleted());
 
             preparedStatement.executeUpdate();
             System.out.println("Task is add to DataBase!");
@@ -47,13 +50,12 @@ public class TaskListImpl extends TaskList {
         if(con==null){
             return;
         }
-        String query="UPDATE Tasks SET name=?, description=?, dueDate=?, is_completed=? WHERE ID=?;";
-        try(PreparedStatement preparedStatement=con.preparedStatement(query)){
-            preparedStatement.setString(1,TaskImpl.getName());
-            preparedStatement.setString(2,TaskImpl.getDescription());
-            preparedStatement.setDate(3,Date.ValueOf(TaskImpl.getDueDate());
-            preparedStatement.setBoolean(4,TaskImpl.isCompleted());
-            preparedStatement.setInt(5,TaskImpl.getId());
+        String query="UPDATE Tasks SET name=?, description=?, dueDate=?, is_completed=? WHERE name=?;";
+        try(PreparedStatement preparedStatement=con.prepareStatement(query)){
+            preparedStatement.setString(1,task.getName());
+            preparedStatement.setString(2,task.getDescription());
+            preparedStatement.setDate(3, Date.valueOf(task.getDueDate()));
+            preparedStatement.setBoolean(4,task.isCompleted());
 
             preparedStatement.executeUpdate();
             System.out.println("Task is UPDATE successfully!");
@@ -66,17 +68,17 @@ public class TaskListImpl extends TaskList {
                 mess.printStackTrace();
             }
         }
-        
+
     }
     /**method to delete a task from the database**/
-    public void deleteTasks(TaskImpl task){
+    public void deleteTask(TaskImpl task){
         Connection con=DBconnection.getConnection();
         if(con==null){
             return;
         }
-        String query="DELETE FROM Tasks WHERE id=?;";
-        try(PreparesStatement preparedStatement=con.preparedStatement(query){
-            preparedStatement.setInt(1,id);
+        String query="DELETE FROM Tasks WHERE name=?;";
+        try(PreparedStatement preparedStatement=con.prepareStatement(query)){
+            preparedStatement.setString(1,task.getName());
 
             preparedStatement.executeUpdate();
         }catch(SQLException mess){
@@ -98,7 +100,7 @@ public class TaskListImpl extends TaskList {
         // Check if the task list is empty
         if (tasks.isEmpty()) {
             System.out.println("No tasks available.");  // display that the list is empty
-            return;  // Exit the method 
+            return;  // Exit the method
         }
 
         // Iterate through the list of tasks and display each one
@@ -107,10 +109,10 @@ public class TaskListImpl extends TaskList {
         for (int i=0;i<tasks.size();i++) {
             // Print task index (starting from 1 for user-friendly display)
             System.out.println("Task "+(i+1)+":");
-            
+
             // Retrieve task details using the getTaskDetails() method from TaskImpl
             System.out.println(tasks.get(i).getTaskDetails());
-            
+
             // Add a separator between tasks for better readability
             System.out.println("-----------------------------");
         }
