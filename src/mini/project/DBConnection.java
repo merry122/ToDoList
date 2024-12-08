@@ -3,7 +3,9 @@ package mini.project;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+/**
+ *@author raouane krama
+ */
 public class DBconnection {
     private static final String Host="127.0.0.1";
     private static final int PORT=3306;
