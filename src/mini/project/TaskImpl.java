@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TaskImpl implements Task {
     // Core attributes of the task
-    private int id;
+    private int id; // id of the task 
     private String name; // The name/title of the task
     private String description; // Detailed description of the task
     private LocalDate dueDate; // Due date for task completion
@@ -66,7 +66,7 @@ public class TaskImpl implements Task {
 
     /**
      * Reuses the createTask method for validation and updating details.
-     * @param newId
+     * @param newId           the update id of the task
      * @param newName        The updated name/title of the task
      * @param newDescription The updated description of the task
      * @param newDueDate     The updated due date in "YYYY-MM-DD" format
