@@ -21,11 +21,21 @@ public abstract class TaskList {
     public abstract void deleteTask(TaskImpl task);
 
 
-  
+
     public abstract void editTask(TaskImpl task);
 
     /**
      *  Abstract method to display all tasks
      */
     public abstract void displayTasks();
+
+    /**
+     *  Abstract method to sort all tasks
+     */
+    public abstract void sortByDueDate();
+
+    /**
+     *  Abstract method to search for a task by the id
+     */
+    public abstract TaskImpl searchById(int id);
 }
