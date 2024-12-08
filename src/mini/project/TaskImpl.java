@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class TaskImpl implements Task {
     // Core attributes of the task
+    private int id;
     private String name; // The name/title of the task
     private String description; // Detailed description of the task
     private LocalDate dueDate; // Due date for task completion
@@ -25,25 +26,27 @@ public class TaskImpl implements Task {
 
     /**
      * Constructor to initialize a task with given details.
-     *
+     * @param id
      * @param name        The name/title of the task
      * @param description The detailed description of the task
      * @param dueDate     The due date of the task in "YYYY-MM-DD" format
      */
-    public TaskImpl(String name,String description,String dueDate) {
-        createTask(name,description,dueDate); // Reuses the createTask method for validation
+    public TaskImpl(int id,String name,String description,String dueDate) {
+        createTask(id,name,description,dueDate); // Reuses the createTask method for validation
     }
 
     /**
      * Creates or updates task details.
      * Validates input to ensure data integrity.
-     *
+     * @param id
      * @param name        The name/title of the task
      * @param description The description of the task
      * @param dueDate     The due date in "YYYY-MM-DD" format
      */
     @Override
-    public void createTask(String name,String description,String dueDate) {
+    public void createTask(int id,String name,String description,String dueDate) {
+
+        if(id<=0) throw new IllegalArgumentException("Task ID must be a positive integer.");
         if (name==null||name.isEmpty())   throw new IllegalArgumentException("Task name cannot be empty.");
         if (description==null||description.isEmpty())    throw new IllegalArgumentException("Task description cannot be empty.");
         try {
@@ -54,7 +57,7 @@ public class TaskImpl implements Task {
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid date format. Use YYYY-MM-DD.");
         }
-
+        this.id=id;
         this.name=name;
         this.description=description;
         this.isCompleted=false;
@@ -63,14 +66,14 @@ public class TaskImpl implements Task {
 
     /**
      * Reuses the createTask method for validation and updating details.
-     *
+     * @param newId
      * @param newName        The updated name/title of the task
      * @param newDescription The updated description of the task
      * @param newDueDate     The updated due date in "YYYY-MM-DD" format
      */
     @Override
-    public void editTask(String newName,String newDescription,String newDueDate) {
-        createTask(newName,newDescription,newDueDate); // Reuse validation logic
+    public void editTask(int newId,String newName,String newDescription,String newDueDate) {
+        createTask(newId,newName,newDescription,newDueDate); // Reuse validation logic
     }
 
     /**
@@ -78,6 +81,7 @@ public class TaskImpl implements Task {
      */
     @Override
     public void deleteTask() {
+        this.id=0;
         this.name=null;
         this.description=null;
         this.dueDate=null;
@@ -175,7 +179,8 @@ public class TaskImpl implements Task {
     @Override
     public String getTaskDetails() {
         String subtasksInfo=subtasks.isEmpty()?"":"\nSubtasks: "+String.join(", ",subtasks);
-        return "Name: "+name+
+        return "Id: " +id+
+                "\nName: "+name+
                 "\nDescription: "+description +
                 "\nDue Date: "+dueDate +
                 "\nPriority: "+(priority!=null?priority:"Not Set") +
@@ -186,9 +191,16 @@ public class TaskImpl implements Task {
     }
 
     // Getter methods for core attributes
+    public int getId() {return id;}
     public String getName() {return name;}
     public String getDescription() {return description;}
     public LocalDate getDueDate() {return dueDate;}
     public boolean isCompleted() {return isCompleted;}
     public Status getStatus() {return status;}
+
+
+    //setter methods
+    public void setCompleted(boolean isCompleted){ this.isCompleted=isCompleted; }
+
+
 }
