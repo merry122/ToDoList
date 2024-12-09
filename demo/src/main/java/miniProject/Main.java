@@ -3,22 +3,28 @@ package miniProject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private static Stage primaryStage; // Central stage for switching views
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/miniProject/Task.fxml"));
-        AnchorPane root = loader.load();
+    public void start(Stage stage) throws Exception {
+        primaryStage = stage;
 
-        // Create a scene and set it on the stage
-        Scene scene = new Scene(root);
+        // Load the initial view
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/miniProject/AddItem.fxml"));
+        Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.setTitle("ToDo Application");
         primaryStage.show();
+    }
+
+    public static void switchView(String fxmlFile) throws Exception {
+        // Method to switch views
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlFile));
+        Scene scene = new Scene(loader.load());
+        primaryStage.setScene(scene);
     }
 
     public static void main(String[] args) {
