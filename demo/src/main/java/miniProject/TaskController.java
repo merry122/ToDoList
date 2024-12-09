@@ -1,78 +1,63 @@
 package miniProject;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 
 public class TaskController {
 
     @FXML
-    private TextField TaskNewTask;  // TextField for entering task name
+    private TextField TaskNewTask;  // TextField for task name
 
     @FXML
-    private DatePicker TaskDateTask;  // DatePicker for task due date
-
-    @FXML
-    private Button TaskAddButton;  // Button to add the task
+    private DatePicker TaskDateTask;  // DatePicker for task date
 
     @FXML
     private TextArea TaskDescription;  // TextArea for task description
 
     @FXML
-    private Button TaskDisplayButton;  // Button for displaying tasks
+    private Button BackToAddItemButton;  // Button to navigate back
 
     @FXML
-    private Button TaskDeletButton;  // Button for deleting tasks
+    private Button TaskDisplayButton;  // Button to display tasks
 
     @FXML
-    private Button BackToAddItemButton;  // Back button for navigating back to task creation
+    private void handleBackToAddItem() {
+        try {
+            Main.switchView("/miniProject/AddItem.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
-    private Label TaskDisplayLabel;  // Label for displaying information
+    private void handleDisplayButtonAction() {
+        try {
+            Main.switchView("/miniProject/DisplayTask.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
-    private void handleTaskAddButton() {
+    public void handleTaskAddButton(ActionEvent actionEvent) {
+        // Gather input from fields
         String taskName = TaskNewTask.getText();
-        String taskDate = TaskDateTask.getValue() != null ? TaskDateTask.getValue().toString() : "No date";
+        String taskDate = (TaskDateTask.getValue() != null) ? TaskDateTask.getValue().toString() : "No date selected";
         String taskDescription = TaskDescription.getText();
 
-        // Add the task details (e.g., to a list or database)
-        System.out.println("Task Added: " + taskName + ", Due: " + taskDate + ", Description: " + taskDescription);
+        // Debugging output (you can replace this with actual task saving logic)
+        System.out.println("Task Added:");
+        System.out.println("Name: " + taskName);
+        System.out.println("Date: " + taskDate);
+        System.out.println("Description: " + taskDescription);
 
         // Clear the fields after adding the task
         TaskNewTask.clear();
         TaskDateTask.setValue(null);
         TaskDescription.clear();
-    }
-
-    @FXML
-    private void handleDisplayButtonAction() {
-        // Example of displaying task information
-        String taskName = TaskNewTask.getText();
-        String taskDate = TaskDateTask.getValue() != null ? TaskDateTask.getValue().toString() : "No date";
-        String taskDescription = TaskDescription.getText();
-
-        // Display the task information in a Label
-        String taskDetails = "Task: " + taskName + "\nDue: " + taskDate + "\nDescription: " + taskDescription;
-        TaskDisplayLabel.setText(taskDetails);  // Update the label with task details
-
-        // Optionally, print to console for debugging
-        System.out.println("Display Task: " + taskDetails);
-    }
-
-    @FXML
-    private void handleBackToAddItem() {
-        // Logic to go back to the task creation screen
-        // For example, clearing all fields to reset the form
-        TaskNewTask.clear();
-        TaskDateTask.setValue(null);
-        TaskDescription.clear();
-
-        // Optionally, if you want to hide or show certain UI elements, or navigate between views,
-        // you can do that here. For example:
-        System.out.println("Back to task creation screen.");
     }
 }
