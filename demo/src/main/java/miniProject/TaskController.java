@@ -18,7 +18,7 @@ public class TaskController {
     private DatePicker TaskDateTask;  // DatePicker for task date
 
     @FXML
-    private TextArea TaskDescription;  // TextArea for task description
+    private TextArea TaskNewDescription;  // TextArea for task description
 
     @FXML
     private Button BackToAddItemButton;  // Button to navigate back
@@ -35,9 +35,9 @@ public class TaskController {
     private static int taskIdCounter = 1;
 
     // Database connection details
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/your_database";  // Replace with your database URL
-    private static final String DB_USERNAME = "your_username";  // Replace with your database username
-    private static final String DB_PASSWORD = "your_password";  // Replace with your database password
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/to_do_list";  // Replace with your database URL
+    private static final String DB_NAME = "root";  // Replace with your database username
+    private static final String PASSWORD = "";  // Replace with your database password
 
     // Method to go back to AddItem view
     @FXML
@@ -65,7 +65,7 @@ public class TaskController {
         // Collecting task details from the fields
         String taskName = TaskNewTask.getText();
         String taskDate = (TaskDateTask.getValue() != null) ? TaskDateTask.getValue().toString() : "No date selected";
-        String taskDescription = TaskDescription.getText();
+        String taskDescription = TaskNewDescription.getText();
 
         // Validate input
         if (taskName.isEmpty() || taskDescription.isEmpty() || taskDate.equals("No date selected")) {
@@ -85,7 +85,7 @@ public class TaskController {
         // Clear the fields after adding the task
         TaskNewTask.clear();
         TaskDateTask.setValue(null);
-        TaskDescription.clear();
+        TaskNewDescription.clear();
 
         // Provide feedback to the user
         System.out.println("Task added to database:");
@@ -104,7 +104,7 @@ public class TaskController {
         int lastId = 0;  // Default value in case no tasks exist
 
         // Database connection
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_NAME,PASSWORD)) {
             // SQL query to get the maximum task ID
             String query = "SELECT MAX(id) FROM tasks";  // Replace 'tasks' with your table name
 
@@ -121,4 +121,6 @@ public class TaskController {
 
         return lastId;  // Return the last task ID, or 0 if no tasks exist
     }
+
+
 }
