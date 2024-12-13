@@ -5,30 +5,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-    public class Main extends Application {
-        private static Stage primaryStage; // Central stage for switching views
+public class Main extends Application {
 
-        @Override
-        public void start(Stage stage) throws Exception {
-            primaryStage = stage;
+    private static Stage primaryStage; // Reference to the primary stage of the application
 
-            // Load the initial view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/miniProject/AddItem.fxml"));
-            Scene scene = new Scene(loader.load());
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("ToDo Application");
-            primaryStage.show();
-        }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Main.primaryStage = primaryStage; // Set the static reference to the stage
+        primaryStage.setTitle("Task Management App");
 
-        public static void switchView(String fxmlFile) throws Exception {
-            // Method to switch views
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlFile));
-            Scene scene = new Scene(loader.load());
-            primaryStage.setScene(scene);
-        }
-
-        public static void main(String[] args) {
-            launch(args);
-        }
-
+        // Load the initial screen: Add Item Page
+        switchView("/miniProject/AddItem.fxml");
+        primaryStage.show();
     }
+
+    /**
+     * Method to switch views by loading an FXML file.
+     * @param fxmlPath Path to the FXML file to load.
+     * @throws Exception Throws an exception if the FXML file is invalid or not found.
+     */
+    public static void switchView(String fxmlPath) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
+        Scene scene = new Scene(loader.load());
+        primaryStage.setScene(scene);
+    }
+
+    public static void main(String[] args) {
+        launch(args); // Launch JavaFX application
+    }
+}
