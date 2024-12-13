@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 
 import java.sql.*;
 
@@ -38,6 +39,22 @@ public class TaskController {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/to_do_list";  // Replace with your database URL
     private static final String DB_NAME = "root";  // Replace with your database username
     private static final String PASSWORD = "";  // Replace with your database password
+
+
+    @FXML
+    private StackPane sidebarContainer; // Sidebar container
+    @FXML
+    private Button burgerMenuButton;    // Burger menu button
+
+    // Method to toggle sidebar visibility
+    @FXML
+    private void toggleSidebar() {
+        // Check current visibility and toggle
+        boolean isVisible = sidebarContainer.isVisible();
+        sidebarContainer.setVisible(!isVisible);
+        sidebarContainer.setManaged(!isVisible); // Adjust layout when toggling
+    }
+
 
     // Method to go back to AddItem view
     @FXML
