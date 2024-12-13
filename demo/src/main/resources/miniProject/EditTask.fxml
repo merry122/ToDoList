@@ -1,31 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="miniProject.EditTaskController">
+            fx:controller="miniProject.EditTaskController"
+            style="-fx-background-color: #F5F5DC;">
+
     <children>
-        <Label layoutX="10" layoutY="10" text="Edit Task" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <Label text="Edit Task"
+               layoutX="20" layoutY="20"
+               style="-fx-font-size: 24px; -fx-font-family: 'Yu Gothic UI Semibold'; -fx-text-fill: #2E8B57;" />
 
-        <Label layoutX="10" layoutY="50" text="Name:" />
-        <TextField fx:id="nameField" layoutX="100" layoutY="50" prefWidth="200" />
+        <Label text="Name:" layoutX="20" layoutY="70"
+               style="-fx-text-fill: #2E8B57;" />
+        <TextField fx:id="nameField" layoutX="100" layoutY="70" prefWidth="300"
+                   style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px;" />
 
-        <Label layoutX="10" layoutY="100" text="Description:" />
-        <TextField fx:id="descriptionField" layoutX="100" layoutY="100" prefWidth="200" />
+        <Label text="Description:" layoutX="20" layoutY="120"
+               style="-fx-text-fill: #2E8B57;" />
+        <TextField fx:id="descriptionField" layoutX="100" layoutY="120" prefWidth="300"
+                   style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px;" />
 
-        <Label layoutX="10" layoutY="150" text="Due Date:" />
-        <TextField fx:id="dueDateField" layoutX="100" layoutY="150" prefWidth="200" />
+        <Label text="Due Date:" layoutX="20" layoutY="170"
+               style="-fx-text-fill: #2E8B57;" />
+        <TextField fx:id="dueDateField" layoutX="100" layoutY="170" prefWidth="300"
+                   style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px;" />
 
-        <Label layoutX="10" layoutY="200" text="Completed:" />
-        <TextField fx:id="completedField" layoutX="100" layoutY="200" prefWidth="200" />
+        <Label text="Completed:" layoutX="20" layoutY="220"
+               style="-fx-text-fill: #2E8B57;" />
+        <TextField fx:id="completedField" layoutX="100" layoutY="220" prefWidth="300"
+                   style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px;" />
 
-        <Button fx:id="saveButton" text="Save" layoutX="100" layoutY="250"
-                style="-fx-font-size: 14px; -fx-background-color: #4caf50; -fx-text-fill: white;"
-                onAction="#handleSaveAction" />
-
-        <Button fx:id="cancelButton" text="Cancel" layoutX="200" layoutY="250"
-                style="-fx-font-size: 14px; -fx-background-color: #f44336; -fx-text-fill: white;"
-                onAction="#handleCancelAction" />
+        <Button fx:id="saveButton" text="Save" layoutX="100" layoutY="270"
+                style="-fx-background-color: #2E8B57; -fx-text-fill: #F5F5DC; -fx-padding: 8px;" />
+        <Button fx:id="cancelButton" text="Cancel" layoutX="200" layoutY="270"
+                style="-fx-background-color: #8B0000; -fx-text-fill: #F5F5DC; -fx-padding: 8px;" />
     </children>
 </AnchorPane>
