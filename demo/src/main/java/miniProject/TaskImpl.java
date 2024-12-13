@@ -200,8 +200,12 @@ public class TaskImpl implements Task {
 
 
     //setter methods
+    public void setName(String name) { this.name=name;}
+    public void setDescription(String description) { this.description=description;}
+    public void setDueDate(String dueDate) { this.dueDate= LocalDate.parse(dueDate);}
     public void setCompleted(boolean isCompleted){ this.isCompleted=isCompleted; }
 
 
-}
 
+
+}
