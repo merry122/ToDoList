@@ -2,6 +2,8 @@ package miniProject;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -14,8 +16,51 @@ public class TaskListImpl extends TaskList {
     public TaskListImpl(){
         tasks=new ArrayList<>();
     }
+
     /**
      * @author raouane krama
+     */
+    public List<TaskImpl> getAll() {
+        Connection con = DBconnection.getConnection();
+        if (con == null) {
+            System.err.println("Failed to establish database connection.");
+            return Collections.emptyList();
+        }
+
+        String query = "SELECT id, name, description, dueDate, is_completed FROM tasks;";
+        List<TaskImpl> tasks = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                Date dueDate = resultSet.getDate("dueDate");
+                boolean isCompleted = resultSet.getBoolean("is_completed");
+
+                TaskImpl task = new TaskImpl(id, name, description, dueDate.toString());
+                task.setCompleted(isCompleted);
+                tasks.add(task);
+            }
+
+            System.out.println("Fetched " + tasks.size() + " tasks from the database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tasks;
+    }
+
+
+    /**
      * Method to add a task to the database.
      * The task details are inserted into the database using an INSERT statement.
      * After successful insertion, a message is printed to confirm the task has been added.
@@ -51,31 +96,37 @@ public class TaskListImpl extends TaskList {
      * The task details are updated based on the task's ID.
      * After the update, a message is printed to confirm the task has been updated.
      */
-    public void editTask(TaskImpl task){
-        Connection con=DBconnection.getConnection();
-        if(con==null){
+    public void editTask(TaskImpl task) {
+        Connection con = DBconnection.getConnection();
+        if (con == null) {
+            System.err.println("Database connection failed!");
             return;
         }
-        String query="UPDATE Tasks SET id=?, name=?, description=?, dueDate=?, is_completed=? WHERE name=?;";
-        try(PreparedStatement preparedStatement=con.prepareStatement(query)){
-            preparedStatement.setInt(1,task.getId());
-            preparedStatement.setString(2,task.getName());
-            preparedStatement.setString(3,task.getDescription());
-            preparedStatement.setDate(4, Date.valueOf(task.getDueDate()));
-            preparedStatement.setBoolean(5,task.isCompleted());
 
-            preparedStatement.executeUpdate();
-            System.out.println("Task is UPDATE successfully!");
-        }catch(SQLException mess){
-            mess.printStackTrace();
+        String query = "UPDATE Tasks SET name = ?, description = ?, dueDate = ?, is_completed = ? WHERE id = ?;";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, task.getName());
+            preparedStatement.setString(2, task.getDescription());
+            preparedStatement.setDate(3, Date.valueOf(task.getDueDate())); // Assumes getDueDate() returns a valid date as String
+            preparedStatement.setBoolean(4, task.isCompleted());
+            preparedStatement.setInt(5, task.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Task updated successfully!");
+            } else {
+                System.err.println("No task was updated. Please check the id.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
-            try{
+            try {
                 con.close();
-            }catch(SQLException mess){
+            } catch (SQLException mess) {
                 mess.printStackTrace();
             }
         }
-
     }
 
     /**
@@ -106,18 +157,20 @@ public class TaskListImpl extends TaskList {
     /**
      * Method to sort tasks by their due date in ascending order.
      * The tasks are retrieved from the database, sorted by due date, and stored in the task list.
+     *
+     * @return the list of tasks sorted by due date.
      */
-    public void sortByDueDate() {
+    public List<TaskImpl> sortByDueDate() {
         Connection con = DBconnection.getConnection();
         if (con == null) {
-            return;
+            return null; // Return null if the connection fails
         }
 
         String query = "SELECT id, name, description, dueDate, is_completed FROM tasks ORDER BY dueDate;";
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             ResultSet result = preparedStatement.executeQuery();
 
-            tasks.clear();
+            tasks.clear(); // Clear the current list to refresh with sorted tasks
 
             while (result.next()) {
                 int id = result.getInt("id");
@@ -128,18 +181,20 @@ public class TaskListImpl extends TaskList {
 
                 TaskImpl task = new TaskImpl(id, name, description, dueDate.toString());
                 task.setCompleted(isCompleted);
-                tasks.add(task);
+                tasks.add(task); // Add each task to the list
             }
         } catch (SQLException mess) {
-            mess.printStackTrace();
+            mess.printStackTrace(); // Print SQL exception stack trace
         } finally {
             try {
-                con.close();
+                con.close(); // Close the connection
             } catch (SQLException mess) {
-                mess.printStackTrace();
+                mess.printStackTrace(); // Print closing connection exception
             }
         }
+        return tasks; // Return the sorted list of tasks
     }
+
 
     /**
      * Method to search for a task by its ID in the database.
@@ -184,6 +239,36 @@ public class TaskListImpl extends TaskList {
         return null;
     }
 
+    // Method to search tasks by name
+    public List<TaskImpl> searchByName(String name) {
+        List<TaskImpl> tasks = new ArrayList<>();
+        String query = "SELECT id, name, description, dueDate, is_completed FROM tasks WHERE name LIKE ?";
+
+        try (Connection connection = DBconnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Use a wildcard for partial matching (%)
+            preparedStatement.setString(1, "%" + name + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String taskName = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                String dueDate = resultSet.getString("dueDate");
+                boolean isCompleted = resultSet.getBoolean("is_completed");
+
+                TaskImpl task = new TaskImpl(id, taskName, description, dueDate.toString());
+                tasks.add(task);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tasks;
+    }
+
     /**
      * Displays all tasks in the task list.
      * If the list is empty, a message is shown to inform the user.
@@ -212,4 +297,3 @@ public class TaskListImpl extends TaskList {
     }
 
 }
-
