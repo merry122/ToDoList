@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="miniProject.TaskController"
-            prefHeight="400.0" prefWidth="600.0">
+            style="-fx-background-color: #F5F5DC;">
 
-    <AnchorPane prefHeight="455.0" prefWidth="631.0" style="-fx-background-color: FAEBD7;">
-        <children>
-            <TextField fx:id="TaskNewTask" layoutX="186.0" layoutY="74.0" prefWidth="200.0" promptText="Task name" />
-            <DatePicker fx:id="TaskDateTask" layoutX="186.0" layoutY="109.0" prefHeight="25.0" prefWidth="208.0" promptText="Due date" />
-            <TextArea fx:id="TaskNewDescription" layoutX="205.0" layoutY="144.0" prefHeight="200.0" prefWidth="379.0" promptText="add description" />
-            <Button fx:id="TaskAddButton" layoutX="531.0" layoutY="384.0" onAction="#handleTaskAddButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: D2B48C;" text="Add" textFill="#323131">
-                <font>
-                    <Font name="Arial Bold" size="17.0" />
-                </font>
-            </Button>
-            <AnchorPane prefHeight="455.0" prefWidth="166.0" style="-fx-background-color: D2B48C;">
-                <children>
+    <children>
+        <!-- Main Layout -->
+        <HBox spacing="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+            <!-- Sliding Sidebar -->
+            <StackPane fx:id="sidebarContainer" prefWidth="200" style="-fx-background-color: #2E8B57;">
+                <VBox alignment="CENTER" spacing="15" prefWidth="200" visible="true"
+                      style="-fx-background-color: #2E8B57;">
+                    <Button fx:id="TaskDisplayButton" text="Display" onAction="#handleDisplayButtonAction"
+                            style="-fx-background-color: #F5F5DC; -fx-text-fill: #2E8B57; -fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-padding: 8px;" />
 
-                    <Button fx:id="TaskDisplayButton" layoutX="33.0" layoutY="172.0" onAction="#handleDisplayButtonAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: FAEBD7;" text="Display" textFill="#141414">
-                        <font>
-                            <Font name="Arial Bold" size="17.0" />
-                        </font>
-                    </Button>
+                    <Button fx:id="BackToAddItemButton" text="Back" onAction="#handleBackToAddItem"
+                            style="-fx-background-color: #F5F5DC; -fx-text-fill: #2E8B57; -fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-padding: 8px;" />
+                </VBox>
+            </StackPane>
 
+            <!-- Content Area -->
+            <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS"
+                  style="-fx-padding: 20;">
+                <!-- Hamburger Menu Button -->
+                <Button fx:id="burgerMenuButton" text="☰" onAction="#toggleSidebar" alignment="TOP_LEFT"
+                        style="-fx-background-color: transparent; -fx-text-fill: #2E8B57; -fx-font-size: 20px; -fx-padding: 5px;" />
 
-                    <Button fx:id="BackToAddItemButton" layoutX="33.0" layoutY="221.0" prefHeight="42.0" prefWidth="101.0"
-                            style="-fx-background-color: FAEBD7;" text="Back" textFill="#111010" onAction="#handleBackToAddItem">
-                        <font>
-                            <Font name="Arial Bold" size="17.0" />
-                        </font>
-                    </Button>
+                <!-- Title -->
+                <Text fx:id="Tasktext" text="New Task!" wrappingWidth="400"
+                      style="-fx-fill: #2E8B57; -fx-font-family: 'Yu Gothic UI Semibold'; -fx-font-size: 36px;" />
 
-                </children>
-            </AnchorPane>
-        </children>
-    </AnchorPane>
+                <!-- Task Input -->
+                <TextField fx:id="TaskNewTask" promptText="Task name" maxWidth="400.0"
+                           style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px; -fx-padding: 5px;" />
 
-    <Text fx:id="Tasktext" fill="#9a7a20" layoutX="186.0" layoutY="53.0" stroke="#f8c38282" strokeType="OUTSIDE" strokeWidth="0.0" text="new task !" wrappingWidth="400.1994323730469">
-        <font>
-            <Font name="Yu Gothic UI Semibold" size="42.0" />
-        </font>
-    </Text>
+                <!-- Date Picker -->
+                <DatePicker fx:id="TaskDateTask" promptText="Due date" maxWidth="400.0"
+                            style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px; -fx-padding: 5px;" />
+
+                <!-- Description Area -->
+                <TextArea fx:id="TaskNewDescription" promptText="Add description" maxWidth="400.0" maxHeight="100.0"
+                          style="-fx-background-color: #F5F5DC; -fx-border-color: #2E8B57; -fx-border-radius: 5px; -fx-padding: 5px;" />
+
+                <!-- Add Button -->
+                <Button fx:id="TaskAddButton" text="Add" onAction="#handleTaskAddButton"
+                        style="-fx-background-color: #2E8B57; -fx-text-fill: #F5F5DC; -fx-font-family: 'Arial'; -fx-font-size: 16px; -fx-padding: 8px;" />
+            </VBox>
+        </HBox>
+    </children>
 </AnchorPane>
