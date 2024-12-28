@@ -1,0 +1,55 @@
+/* General styling for the root */
+.root {
+    -fx-background-color: #f7f7f7; /* Light background color */
+}
+
+/* Styling for the "Hello" Text */
+#textHello {
+    -fx-fill: #4B0082; /* Indigo color */
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 29px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 4, 0.5, 0, 2);
+}
+
+/* Styling for the welcome text */
+#textwelcome {
+    -fx-fill: #7f8c8d; /* Gray color */
+    -fx-font-family: "Verdana";
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}
+
+
+
+/* Styling for the login button */
+#loginbutton {
+    -fx-background-color: #7B68EE; /* Medium Slate Blue */
+    -fx-text-fill: white; /* Ensure text is white */
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 30px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.5, 0, 2);
+}
+
+/* Hover effect for the login button */
+#loginbutton:hover {
+    -fx-background-color: #5a5a5a; /* Gray */
+    -fx-text-fill: white; /* Keep text white on hover */
+}
+
+/* Style for PasswordField */
+.text-field {
+    -fx-background-color: transparent; /* Remove default background */
+    -fx-border-width: 0 0 2px 0; /* Bottom border only */
+    -fx-border-color: #63188e; /* Black border color */
+    -fx-prompt-text-fill: #888888; /* Color for placeholder text */
+    -fx-text-fill: #000000; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 0; /* Adjust padding */
+}
+
+.password-field:focused {
+    -fx-border-color: #5a5a5a; /* Gray when focused */
+}

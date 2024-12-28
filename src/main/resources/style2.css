@@ -1,0 +1,172 @@
+
+ .button {
+     -fx-background-color: transparent; /* Fully transparent background */
+     -fx-border-color: transparent;     /* No visible border */
+     -fx-text-fill: #3f0591;            /* Text color */
+     -fx-font-size: 14px;               /* Font size */
+     -fx-font-family: "Arial";          /* Font family */
+     -fx-underline: true;               /* Underline the text */
+     -fx-padding: 0;                    /* Remove padding for hyperlink style */
+ }
+
+ /* Hover effect */
+ .button:hover {
+     -fx-text-fill: #5b37b6;            /* Slightly lighter text color on hover */
+     -fx-cursor: hand;                  /* Change cursor to hand */
+ }
+
+
+
+
+
+/* Transparent and small MenuButton */
+.menu-button {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-text-fill: #4527A0;            /* Text color */
+    -fx-font-size: 12px;               /* Small font size */
+    -fx-font-family: "Arial";          /* Font family */
+    -fx-padding: 2 5 2 5;              /* Minimal padding */
+    -fx-border-color: transparent;     /* No border by default */
+    -fx-underline: true;               /* Underline text */
+}
+
+/* Hover effect for MenuButton */
+.menu-button:hover {
+    -fx-background-color: transparent; /* Keep the background transparent */
+    -fx-text-fill: #5b37b6;            /* Slightly lighter text color on hover */
+    -fx-cursor: hand;                  /* Hand cursor on hover */
+}
+
+/* Dropdown menu styling */
+.context-menu {
+    -fx-background-color: #ffffff;    /* White background for dropdown */
+    -fx-border-color:  #512DA8;        /* Light gray border */
+    -fx-border-radius: 5px;           /* Rounded corners */
+}
+
+/* Menu items within the dropdown */
+.menu-item {
+    -fx-text-fill: #3f0591;           /* Text color for menu items */
+    -fx-font-size: 12px;              /* Font size for dropdown items */
+    -fx-padding: 2 5 2 5;             /* Minimal padding */
+}
+
+.menu-item:hover {
+    -fx-background-color:#3f0591;;    /* Light gray background on hover */
+    -fx-text-fill: #3f0591;;           /* Lighter text color on hover */
+}
+
+/* Optional: Arrow styling for the MenuButton */
+.menu-button .arrow {
+    -fx-background-color: transparent; /* Transparent arrow */
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";  /* Custom arrow shape */
+    -fx-fill: #3f0591;                 /* Arrow color matching text */
+}
+
+
+
+.charm-list-view {
+    -fx-background-color: #f4f4f4;
+    -fx-border-radius: 10;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-cell-size: 40px;
+}
+
+.charm-list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-background-insets: 0;
+}
+
+.charm-list-view .list-cell:filled:hover {
+    -fx-background-color: #ddd; /* Hover effect */
+    -fx-background-radius: 8;
+}
+.table-view {
+    -fx-background-color: transparent; /* Makes the background transparent */
+    -fx-border-color: #EDE7F6; /* Adds a light border */
+    -fx-border-width: 1px; /* Sets the border width */
+    -fx-table-cell-border-color:#EDE7F6; /* Colors the borders between cells */
+    -fx-padding: 5px; /* Adds padding inside the table */
+}
+
+.table-view .column-header {
+    -fx-background-color: #f4f4f4; /* Light gray background for headers */
+    -fx-border-color: #EDE7F6; /* Borders around headers */
+    -fx-font-weight: bold; /* Makes header text bold */
+    -fx-alignment: CENTER; /* Centers the header text */
+}
+
+.table-view .table-cell {
+    -fx-padding: 8px; /* Adds padding inside cells */
+    -fx-alignment: CENTER_LEFT; /* Aligns text to the left */
+    -fx-font-size: 14px; /* Sets the font size for cells */
+    -fx-text-fill: #333; /* Dark gray text color */
+}
+
+.table-view .table-cell:focused {
+    -fx-background-color: #dbe7f4; /* Highlight background color for selected cells */
+    -fx-text-fill: #000; /* Text color for selected cells */
+}
+
+.table-view:focused {
+    -fx-border-color: #0078d7; /* Focus outline color */
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e2e2e2; /* Light gray background for the header row */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #fafafa; /* Light background for odd rows */
+}
+
+.table-row-cell:even {
+    -fx-background-color: #ffffff; /* White background for even rows */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #0078d7; /* Blue background for selected rows */
+    -fx-text-fill: #ffffff; /* White text color for selected rows */
+}
+
+.table-view .scroll-bar {
+    -fx-background-color: transparent; /* Transparent scrollbar */
+}
+
+
+/* Style for the search TextField */
+.text-field {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #5E35B1; /* Green border */
+    -fx-border-width: 2px; /* Border thickness */
+    -fx-padding: 5px 10px; /* Padding inside the TextField */
+    -fx-font-size: 14px; /* Font size for the text */
+    -fx-text-fill: #333333; /* Text color */
+    -fx-focus-color: #4CAF50; /* Border color when focused */
+    -fx-background-insets: 0, 1; /* Removes background inset on focus */
+    -fx-cursor: text; /* Cursor style */
+}
+
+/* Style for the search TextField when focused */
+.text-field:focused {
+    -fx-border-color: #2196F3; /* Change border color when focused */
+    -fx-background-color: #f0f8ff; /* Light blue background on focus */
+}
+
+/* Optional: Style for the prompt text */
+.text-field .text {
+    -fx-font-style: italic; /* Italicize the prompt text */
+    -fx-fill: #9E9E9E; /* Gray color for prompt text */
+}
+
+/* Optional: Style for the icon inside the TextField */
+.text-field .text-field .graphic {
+    -fx-padding: 0 5px 0 0; /* Padding to the right */
+}

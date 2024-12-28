@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="554.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../../../../../Downloads/fxmlndstyle/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miniProject.SignupController">
+    <children>
+        <!-- Center the ImageView -->
+        <ImageView fx:id="signupImageView" fitHeight="204.0" fitWidth="257.0" layoutX="171.5" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@image/photosignup.jpg" />
+            </image>
+        </ImageView>
+
+        <!-- Center the welcome Text -->
+        <Text fx:id="TextWelcoming" fill="#5a0eac" layoutX="203.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let's create a new account!" textAlignment="CENTER" wrappingWidth="192.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Text>
+
+        <!-- Center the email TextField -->
+        <TextField fx:id="maitextfeild" layoutX="209.5" layoutY="300.0" prefHeight="25.0" prefWidth="181.0" promptText="e-mail" stylesheets="@../../../../../Downloads/fxmlndstyle/style.css" />
+
+        <!-- Center the username TextField -->
+        <TextField fx:id="usernametextfeild" layoutX="209.5" layoutY="340.0" prefHeight="25.0" prefWidth="181.0" promptText="username" stylesheets="@../../../../../Downloads/fxmlndstyle/style.css" />
+
+        <!-- Center the password PasswordField -->
+        <PasswordField fx:id="passwordtextfeild" layoutX="209.5" layoutY="380.0" prefHeight="25.0" prefWidth="181.0" promptText="password" stylesheets="@../../../../../Downloads/fxmlndstyle/style.css" />
+
+        <!-- Center the SignUp button -->
+        <Button id="loginbutton" fx:id="buttonsignup" layoutX="234.5" layoutY="430.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #7B68EE;" text="SignUp" textAlignment="CENTER" textFill="WHITE" onAction="#handleSignup">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
